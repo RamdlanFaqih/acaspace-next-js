@@ -1,18 +1,33 @@
 // SERVER COMPONENTS
 
 import React from 'react'
-import BuyProduct from '@/components/buyProduct'
+import CardProduct from '@/components/CardProduct'
+import { ProductResponse } from '@/types/product'
 
-const DetailProduct = () => {
+const Product = async () => {
+  const res = await fetch('http://localhost:2000/api/products')
+  const data: ProductResponse = await res.json()
+  const product = data.results
+
+  console.log(res)
+  console.log(product)
   return (
     <>
-    <div>OPPO A6300</div>
-    <img src="https://placehold.co/600x400" alt="image" />
-    <div>Deskripsi Project</div>
-    <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt esse quibusdam natus fuga, corporis molestiae consectetur quasi nihil deleniti est maiores quam ad, provident exercitationem repellendus quis neque magni impedit.</div>
-    <BuyProduct />
+      <div className='flex gap-[20px] overflow-x-auto pb-5'>
+        {product.map((item) => (
+          <CardProduct
+            id={item.id}
+            current_price={item.current_price}
+            discount={item.discount}
+            image={item.image}
+            name={item.name}
+            original_price={item.original_price}
+            savings={item.savings}
+            key={item.id} />
+        ))}
+      </div>
     </>
   )
 }
 
-export default DetailProduct
+export default Product

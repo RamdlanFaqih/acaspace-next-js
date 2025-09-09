@@ -1,3 +1,5 @@
+import Navbar from "@/components/Navbar";
+
 export default function WithNavbarLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,7 @@ export default function WithNavbarLayout({
 }>) {
   return (
     <>
-      <div className="bg-amber-400">Navbar</div>
+    <Navbar />
       {children}
     </>
   );
